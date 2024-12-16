@@ -34,7 +34,7 @@ class CityGraph:
                 next_edge = self.find_next_edge(current_point, visited_edges, current_battery)
                 if not next_edge:  # Si aucune route valide n'est trouvée
                     print(f" Batterie faible ou aucune route disponible - Retour au point de recharge.")
-                    total_distance += self.return_to_recharge(current_point, start_point)
+                    daily_distance += self.return_to_recharge(current_point, start_point)
                     break
 
                 length, next_point = next_edge  # Longueur d'abord
@@ -51,13 +51,14 @@ class CityGraph:
             # Retour au point de recharge
             if current_point != start_point:
                 print(f" Retour au point de recharge.")
-                total_distance += self.return_to_recharge(current_point, start_point)
-
+                daily_distance += self.return_to_recharge(current_point, start_point)
 
             print(f" Distance totale pour le jour {day}: {daily_distance}")
+            total_distance += daily_distance  # Ajouter la distance du jour au total
 
         print(f"\nDistance totale parcourue : {total_distance}")
         return total_distance
+
 
     def is_one_way(self, start, end):
         """ Vérifie si une route est à sens unique """
