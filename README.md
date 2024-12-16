@@ -128,3 +128,151 @@ git merge main
 5. Mettre à jour régulièrement le code avec `git pull origin main`.
 
 Si vos collègues rencontrent un problème, n'hésitez pas à me le signaler pour que je les guide ! 😊
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pour ouvrir votre projet **Optimisation** avec **Visual Studio Code**, suivez ces étapes simples :
+
+---
+
+### **1. Ouvrir le dossier du projet dans Visual Studio Code**
+1. **Lancez Visual Studio Code**.
+2. Dans le menu principal, cliquez sur **File > Open Folder** (ou **Fichier > Ouvrir un dossier** si votre VS Code est en français).
+3. Naviguez jusqu'au dossier **Optimisation** sur votre disque `D:\`.
+4. Cliquez sur **Sélectionner un dossier**.
+
+---
+
+### **2. Configurer l'environnement Python**
+Pour utiliser l'environnement virtuel créé précédemment (`env`), configurez Visual Studio Code pour qu'il utilise le bon interpréteur Python.
+
+1. Ouvrez la **palette de commandes** :
+   - Appuyez sur `Ctrl + Shift + P` (ou `Cmd + Shift + P` sur macOS).
+
+2. Tapez et sélectionnez **Python: Select Interpreter**.
+
+3. Dans la liste des interpréteurs disponibles, sélectionnez celui qui correspond à votre environnement virtuel :
+   ```
+   D:\Optimisation\env\Scripts\python.exe
+   ```
+   - Si vous ne le voyez pas, choisissez **Enter interpreter path** et naviguez manuellement jusqu'à :
+     ```plaintext
+     D:\Optimisation\env\Scripts\python.exe
+     ```
+
+---
+
+### **3. Ouvrir un terminal intégré**
+Pour exécuter vos scripts Python directement dans Visual Studio Code, utilisez le terminal intégré :
+
+1. Ouvrez le terminal intégré :
+   - Allez dans **Terminal > New Terminal** (ou appuyez sur `Ctrl + `).
+
+2. Assurez-vous que l'environnement virtuel est activé dans ce terminal :
+   - Sous Windows :
+     ```bash
+     .\env\Scripts\activate
+     ```
+
+3. Lancez votre script principal :
+   ```bash
+   python main.py
+   ```
+
+---
+
+### **4. Bonus : Ajouter un raccourci pour exécuter le code**
+Pour exécuter rapidement vos scripts :
+1. Cliquez sur **Run > Add Configuration** dans le menu.
+2. Ajoutez un fichier `launch.json` pour configurer l'exécution du fichier `main.py` directement.
+
+---
+
+### **Récapitulatif**
+- Ouvrez le dossier **Optimisation** dans Visual Studio Code.
+- Sélectionnez l'environnement virtuel via **Python: Select Interpreter**.
+- Activez l'environnement virtuel dans le terminal intégré.
+- Exécutez vos fichiers Python directement dans le terminal avec `python main.py`.
+
+Si vous avez des difficultés à sélectionner l'interpréteur ou lancer le script, faites-le-moi savoir ! 😊
+
+
+
+PS D:\Optimisation> .\env\Scripts\activate
+.\env\Scripts\activate : Impossible de charger le fichier D:\Optimisation\env\Scripts\Activate.ps1, car l’exécution de scripts est désactivée sur ce système. Pour plus d’informations, consultez 
+about_Execution_Policies à l’adresse https://go.microsoft.com/fwlink/?LinkID=135170.
+Au caractère Ligne:1 : 1
++ .\env\Scripts\activate
++ ~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : Erreur de sécurité : (:) [], PSSecurityException
+    + FullyQualifiedErrorId : UnauthorizedAccess
+PS D:\Optimisation> 
+
+
+
+Ce message d'erreur apparaît parce que **l'exécution de scripts PowerShell** est désactivée par la politique de sécurité de votre système. Voici comment résoudre ce problème en modifiant temporairement la politique d'exécution :
+
+---
+
+### **Solution : Modifier la politique d'exécution**
+
+1. **Ouvrez PowerShell en mode administrateur** :
+   - Cherchez **PowerShell** dans le menu Démarrer.
+   - Faites un clic droit sur **Windows PowerShell** et sélectionnez **Exécuter en tant qu'administrateur**.
+
+2. **Autoriser temporairement les scripts locaux :**
+   - Tapez la commande suivante pour autoriser l'exécution des scripts uniquement dans votre session actuelle :
+     ```bash
+     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+     ```
+
+   - Si demandé, tapez **Y** pour confirmer.
+
+   > **Explication** :  
+   `RemoteSigned` permet d'exécuter les scripts créés localement (comme votre `activate`) sans problème. Les scripts téléchargés depuis Internet nécessiteront une signature.
+
+3. **Ressayez d'activer l'environnement virtuel :**
+   - Retournez dans votre terminal PowerShell et activez votre environnement :
+     ```bash
+     .\env\Scripts\activate
+     ```
+
+---
+
+### **Vérifier l'activation**
+Si tout fonctionne, vous devriez voir `(env)` apparaître au début de votre invite de commande, comme ceci :
+
+```
+(env) PS D:\Optimisation>
+```
+
+---
+
+### **Remarque**
+La modification avec `Set-ExecutionPolicy` n'affecte que votre utilisateur local. Si vous voulez rétablir la sécurité par défaut après avoir terminé, exécutez :
+
+```bash
+Set-ExecutionPolicy -ExecutionPolicy Restricted -Scope CurrentUser
+```
+
+---
+
+Si vous rencontrez encore des difficultés, je suis là pour vous aider ! 😊
+
+
+
+
+
+
+
+
