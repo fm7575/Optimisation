@@ -1,0 +1,16 @@
+# Ignorer l'environnement virtuel
+env/
+
+# Ignorer les fichiers Python compilés
+*.pyc
+__pycache__/
+
+# Ignorer les configurations spécifiques à Visual Studio Code
+.vscode/
+
+# Ignorer les fichiers log
+*.log
+
+# Ignorer les fichiers spécifiques à d'autres outils IDE
+.idea/
+*.iml
