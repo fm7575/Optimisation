@@ -271,6 +271,153 @@ Si vous rencontrez encore des difficultés, je suis là pour vous aider ! 😊
 
 
 
+Voici une section complète pour votre **README.md** qui servira de **guide Git** pour l'équipe. Ce guide couvre les commandes essentielles pour travailler en équipe sur le projet avec Git et GitHub.
+
+---
+
+## **Guide Git pour collaborer sur le projet**
+
+Ce guide décrit les étapes essentielles pour utiliser **Git** et **GitHub** afin de collaborer efficacement sur le projet **Optimisation**.
+
+---
+
+### **1. Cloner le projet**
+Pour récupérer le projet depuis GitHub pour la première fois :
+
+```bash
+git clone https://github.com/nom-utilisateur/Optimisation.git
+cd Optimisation
+```
+- Remplacez `nom-utilisateur` par votre nom d'utilisateur GitHub ou le nom de l'organisation.
+
+---
+
+### **2. Mettre à jour votre projet local (pull)**
+Avant de commencer à travailler, assurez-vous d'avoir la dernière version du projet en local :
+
+```bash
+git pull origin main
+```
+
+---
+
+### **3. Créer une nouvelle branche**
+Chaque nouvelle fonctionnalité ou correction doit être réalisée sur une **branche dédiée**. Pour créer une branche et basculer dessus :
+
+```bash
+git checkout -b nom-de-la-branche
+```
+Exemple :
+```bash
+git checkout -b feature/ajout-json-solution
+```
+
+---
+
+### **4. Ajouter et valider vos modifications**
+Après avoir modifié ou ajouté des fichiers, suivez ces étapes pour sauvegarder votre travail :
+
+1. **Ajouter vos fichiers modifiés** :
+   ```bash
+   git add .
+   ```
+
+2. **Créer un commit avec un message descriptif** :
+   ```bash
+   git commit -m "Ajout de la fonctionnalité pour générer un fichier JSON de solution"
+   ```
+
+---
+
+### **5. Pousser votre branche sur GitHub**
+Une fois vos modifications prêtes, poussez votre branche sur GitHub :
+
+```bash
+git push origin nom-de-la-branche
+```
+Exemple :
+```bash
+git push origin feature/ajout-json-solution
+```
+
+---
+
+### **6. Créer une Pull Request (PR)**
+1. Allez sur votre dépôt GitHub : [Optimisation](https://github.com/nom-utilisateur/Optimisation).
+2. Cliquez sur l'onglet **Pull Requests**.
+3. Cliquez sur **New Pull Request**.
+4. Sélectionnez votre branche (`feature/ajout-json-solution`) et créez la PR.
+5. Ajoutez un commentaire pour expliquer vos modifications et demandez une revue.
+
+---
+
+### **7. Basculer entre les branches**
+Si vous devez changer de branche pour travailler sur autre chose :
+
+- **Voir les branches existantes** :
+   ```bash
+   git branch
+   ```
+
+- **Basculer sur une autre branche** :
+   ```bash
+   git checkout nom-de-la-branche
+   ```
+
+---
+
+### **8. Mettre à jour votre branche avec `main`**
+Pour récupérer les dernières modifications de la branche principale (`main`) dans votre branche de travail :
+
+1. Basculez sur `main` et mettez à jour :
+   ```bash
+   git checkout main
+   git pull origin main
+   ```
+
+2. Retournez sur votre branche et fusionnez `main` :
+   ```bash
+   git checkout nom-de-la-branche
+   git merge main
+   ```
+
+---
+
+### **9. Récupérer les changements d'une autre branche**
+Si quelqu'un a poussé du code sur une autre branche et que vous voulez la tester :
+
+```bash
+git fetch origin
+git checkout nom-de-la-branche
+```
+
+---
+
+### **Résumé des commandes utiles**
+| Action                                | Commande                                 |
+|---------------------------------------|------------------------------------------|
+| Cloner le projet                      | `git clone <url-du-repo>`                |
+| Mettre à jour depuis `main`           | `git pull origin main`                   |
+| Créer une nouvelle branche            | `git checkout -b nom-de-la-branche`      |
+| Basculer sur une branche existante    | `git checkout nom-de-la-branche`         |
+| Ajouter des modifications             | `git add .`                              |
+| Créer un commit                       | `git commit -m "Message du commit"`      |
+| Pousser sur GitHub                    | `git push origin nom-de-la-branche`      |
+| Mettre à jour une branche avec `main` | `git merge main`                         |
+| Voir les branches                     | `git branch`                             |
+
+---
+
+### **Bonnes pratiques**
+1. **Travaillez toujours sur une branche dédiée** (jamais directement sur `main`).
+2. **Faites des commits fréquents** avec des messages clairs.
+3. **Synchronisez régulièrement votre branche** avec `main` pour éviter les conflits.
+4. **Revoyez et testez les Pull Requests** avant de les fusionner.
+
+---
+
+Avec ce guide, votre équipe devrait pouvoir travailler efficacement sur le projet **Optimisation** ! 🚀
+
 
 
 
