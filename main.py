@@ -12,6 +12,16 @@ class CityGraph:
         # Construire une liste d'adjacence
         self.graph = self.build_adjacency_list()
     
+    def save_solution(self, start_point, itinerary, output_file):
+        """ Génère un fichier JSON contenant la solution """
+        solution = {
+            "chargeStationId": start_point,
+            "itinerary": itinerary
+        }
+        with open(output_file, 'w') as file:
+            json.dump(solution, file, indent=4)
+        print(f"\nSolution sauvegardée dans {output_file}")
+
     def build_adjacency_list(self):
         adjacency_list = {i['id']: [] for i in self.intersections}
         for road in self.roads:
@@ -23,40 +33,44 @@ class CityGraph:
     def greedy_traversal(self, start_point):
         visited_edges = set()  # Suivi des routes parcourues
         total_distance = 0
-
+        itinerary = [start_point]  # Liste des intersections visitées
+    
         for day in range(1, self.num_days + 1):
             print(f"\n--- Jour {day} ---")
             current_battery = self.battery_capacity
             current_point = start_point
             daily_distance = 0
-
+    
             while current_battery > 0:
                 next_edge = self.find_next_edge(current_point, visited_edges, current_battery)
                 if not next_edge:  # Si aucune route valide n'est trouvée
-                    print(f" Batterie faible ou aucune route disponible - Retour au point de recharge.")
+                    print(f" Batterie faible  ou aucune route disponible - Retour au point de recharge.")
                     daily_distance += self.return_to_recharge(current_point, start_point)
                     break
-
-                length, next_point = next_edge  # Longueur d'abord
-                # Ajouter la route visitée dans les deux sens si elle n'est pas à sens unique
+                
+                length, next_point = next_edge
                 visited_edges.add((current_point, next_point))
                 if not self.is_one_way(current_point, next_point):
                     visited_edges.add((next_point, current_point))
-
+    
                 print(f" Parcours : {current_point} -> {next_point}, Distance : {length}")
+                itinerary.append(next_point)  # Ajouter l'intersection visitée
                 current_point = next_point
                 current_battery -= length
                 daily_distance += length
-
-            # Retour au point de recharge
+    
             if current_point != start_point:
                 print(f" Retour au point de recharge.")
                 daily_distance += self.return_to_recharge(current_point, start_point)
-
+                itinerary.append(start_point)  # Retour au point de recharge
+    
             print(f" Distance totale pour le jour {day}: {daily_distance}")
-            total_distance += daily_distance  # Ajouter la distance du jour au total
-
+            total_distance += daily_distance
+    
         print(f"\nDistance totale parcourue : {total_distance}")
+    
+        # Sauvegarder l'itinéraire dans un fichier JSON
+        self.save_solution(start_point, itinerary, "solution.json")
         return total_distance
 
 
