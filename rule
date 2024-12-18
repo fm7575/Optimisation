@@ -1,0 +1,95 @@
+
+
+---
+
+## **Règles et objectifs du défi**
+
+### **Objectif principal**  
+Parcourir **toutes les routes** d’un graphe au moins une fois (y compris les sens uniques) en **un nombre limité de jours** avec gestion de la batterie.
+
+---
+
+## **1. Données d'entrée (dataset)**  
+Les données d'entrée contiennent :  
+- **intersections** : Liste des points du graphe.  
+- **routes** : Liste des routes entre les intersections, incluant :  
+   - `intersectionId1` : point de départ de la route.  
+   - `intersectionId2` : point d'arrivée de la route.  
+   - `length` : longueur de la route (distance).  
+   - `isOneWay` : indique si la route est **à sens unique**.  
+- **batteryCapacity** : Distance maximale que l’on peut parcourir avant de devoir **recharger**.  
+- **numDays** : Nombre maximum de jours disponibles pour accomplir le défi.  
+
+---
+
+## **2. Règles pour le parcours des routes**  
+
+1. **Parcourir toutes les routes** :  
+   - Chaque route doit être parcourue au moins une fois.  
+   - Pour les **routes bidirectionnelles**, on peut choisir le sens du parcours.  
+   - Pour les **routes à sens unique**, on doit respecter la direction indiquée.
+
+2. **Gestion de la batterie** :  
+   - La batterie a une capacité définie dans le dataset (**batteryCapacity**).  
+   - La **distance totale parcourue** ne peut pas dépasser cette capacité avant de revenir au **point de recharge**.  
+   - Il faut **impérativement revenir au point de recharge** **avant** que la batterie soit épuisée.  
+
+3. **Retour au point de recharge** :  
+   - Chaque retour au **point de recharge** (point de départ) compte pour **1 jour passé**.  
+   - Il faut donc **éviter de revenir au point de recharge si ce n’est pas nécessaire** pour optimiser le nombre de jours.  
+   - Il est obligatoire de revenir au point de recharge avant que la batterie atteigne sa capacité maximale.
+   - Le retour doit être anticipé pour éviter toute panne. L’algorithme doit donc vérifier à chaque déplacement si la batterie restante permet un retour au point de recharge en utilisant le plus court chemin.
+
+4. **Point de recharge fixe** :  
+   - Le **point de départ** est également le **point de recharge**.  
+   - Ce point est **librement choisi** au début du défi, mais il ne peut **plus changer** par la suite.
+
+5. **Gestion des jours** :  
+   - Le nombre de jours disponibles est défini dans les données d'entrée (**numDays**).  
+   - Si le nombre de jours est **dépassé**, le défi est **perdu**.  
+
+6. **Dernier jour** :  
+   - Au **dernier jour**, il est **autorisé de terminer le parcours sur n'importe quel point**.  
+   - Revenir au point de recharge n’est **pas obligatoire**.
+
+---
+
+## **3. Contraintes supplémentaires**  
+
+- La longueur d'une route est déterminée par la valeur `length` dans les données d'entrée.  
+- L’algorithme doit donc prendre en compte :  
+   - Les **longueurs des routes** pour optimiser le parcours.  
+   - Le **retour anticipé** au point de recharge pour éviter une panne de batterie.  
+
+---
+
+## **4. Exemple récapitulatif**  
+
+### **Données :**
+- `batteryCapacity = 70` (distance maximale avant recharge).  
+- `numDays = 2` (nombre maximum de jours disponibles).  
+- Routes :  
+   - `0 → 6` (sens unique, longueur 10).  
+   - `6 → 2` (sens unique, longueur 10).  
+   - `4 ↔ 5` (bidirectionnelle, longueur 10).
+
+### **Jour 1 :**
+- **Départ du point 0**.  
+   - `0 → 6`  
+   - `6 → 2`  
+   - `2 → 3`  
+   - Retour au **point de recharge 0** avant la fin de la batterie.
+
+**Fin du jour 1** :  
+- Batterie utilisée = 70.  
+- Routes parcourues = `0 → 6`, `6 → 2`, `2 → 3`.
+
+---
+
+### **Jour 2 :**
+- **Départ du point 0**.  
+   - Continuer pour couvrir les routes restantes.  
+   - Finir le parcours **n'importe où** au dernier jour.
+
+---
+
